@@ -5,6 +5,7 @@ from skimage import io
 import numpy as np
 from skimage.filters import threshold_otsu
 import glob
+from scipy.stats import linregress
 
 time = 0
 time_list = []
@@ -35,3 +36,7 @@ plt.plot(time_list,area_list,'bo')
 # ax[2].imshow(binary)
 # ax[2].set_title("Binary image")
 plt.show()
+# print(linregress(time_list,area_list))
+slope, intercept, r_value, p_value, std_err = linregress(time_list, area_list)
+print("y = {}x + {}".format(slope,intercept))
+print("R\N{SUPERSCRIPT TWO} = {}".format(r_value**2))

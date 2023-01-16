@@ -1,0 +1,44 @@
+"""
+Summarize the content in each lesson 
+"""
+
+# 19
+filter image with scipy.ndimage function, such as sobel, gaussian filter
+
+# 20 
+filter image with skimage functions, such as resize, rescale, robert, 
+scharr, prewitt, canny
+a real case presents the thresholding with how to deal with low contrast
+image with entropy function
+
+# 21
+continue the real case study, study the scratch cell recovery rate
+
+# 25
+introduction of opencv, color channels, cv2.split(), cv2.merge()
+
+# 26
+denoise and edge detection with opencv. cv2.Canny()
+
+# 27
+introduced different method of histogram equalization. 
+1. Global histogram equalization, cv2.equalizeHist()
+2. localized adaptive histogram equalization CLAHE
+3. threshold with manual input; cv2.threshold()
+
+# 28
+cv2 median filter
+cv2 thresholding, otsu
+morphological processing, with cv2 erosion, dilation
+cv2 openning, closing 
+
+# 29
+In the pictures, there are corners that more meaningful to be used as 
+features, the features are patterns with identical character could be used
+to register the object in the image. this concept is introduced in the 
+computer vision - SIFT descriptor
+In CV2, there are various way to find the feature points, includes Harris
+corner, Shi-Tomasi corner, SIFT, FAST, BRIEF, ORB
+Sreeni highlighted the importance of ORB. A real case study using the ORB 
+is presented in the next session
+ 

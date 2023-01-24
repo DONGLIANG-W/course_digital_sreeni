@@ -101,6 +101,7 @@ plt.ylim(0,)
 # or negitive relationship, close to 0 indicates no relationship
 # P-value < 0.001 indicates strong certainty in the result whereas larger
 # P-value indicates weak certainty in the result
+from scipy import stats
 pearson_coef, p_value = stats.pearsonr(df['horsepower'], df['price'])
 
 # association between two categorical variables: Chi-square
@@ -119,11 +120,69 @@ pearson_coef, p_value = stats.pearsonr(df['horsepower'], df['price'])
 # and the chi-square value, get the probability value p. 
 scipy.stats.chi2_contingency(cont_table, correction=True)
 
+# linear regression and multiple linear regression
+# simple linear regression y=b_0+b_1x
+# import linear_model from scikit-learn
+from sklearn.linear_model import LinearRegression
+# create a linear regression object 
+lm=LinearRegression()
+x=df[['highway-mpg']]
+y=['price']
+# use lm.fit() to fit the model
+lm.fit(x,y)
+y_predict = lm.predict(x)
+# the slope and intercept could be called
+lm.intercept_
+lm.coef_
+lm.score(x,y) #compute the R-square value
+
+# Multiple linear regression is used to explain the relationship between
+# one continuous Y target variable with two or more predictor X variables
+# Y=b_0+b_1*X_1+b_2*X_2+...
+z=df[['horsepower','curb-weight','engine-size','highway-mpg']]
+lm.fit(z, df['price'])
+y_predict = lm.predict(z)
+lm.coef_
+lm.intercept_
+
+# model evaluation using visualization, here using seaborn
+import seaborn as sns
+sns.regplot(x='highway-mpg', y='price', data=df)
+plt.ylim(0,)
+# the residue plot could be draw
+sns.residplot(df['highway-mpg'], df['price'])
+
+# distribution plot, which helps to identify if the regression is proper
+# to create the model that generate the result has similar distribution
+# of the predicted parameter
+import seaborn as sns
+# first plot the data in red, not hist=False indicated plot the distribution
+# instead of the histogram
+ax1 = sns.distplot(df['price'], hist=False, color='r', label='Actual Value')
+# second plot the predicted result distribution in blue
+sns.displot(Yhat, hist=False, color='b', label='Fitted Value', ax=ax1)
+
+# polynomial regression using PolynomialFeatures
+from sklearn.preprocessing import PolynomialFeatures
+pr = PolynomialFeatures(degree=2, include_bias=False)
+pr.fit_transform([[1,2]])
+# scales of the features could affect the prediction, to normalize the 
+# each features in pre-processing
+from sklearn.preprocessing import StandardScaler
+SCALE = StandardScaler()
+SCALE.fit(x_data[['horsepower','highway-mpg']])
+x_scale = SCALE.transform(x_data[['horsepower','highway-mpg']])
+
+# numpy reshape
+# example np.array(30.0),reshape(-1, 1) means get the 30.0 into an array,
+# then reshape it into a new array, with whatever rows that necessary but
+# fixed 1 column, following example reshaped the 2D array into array with
+# 3 columns
+>>>np.array([[1,2],[3,4],[5,6]]).reshape(-1,3)
+array([[1, 2, 3],
+       [4, 5, 6]])
 
 
-
-
- 
 
 
 

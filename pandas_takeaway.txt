@@ -71,6 +71,9 @@ plt.title("Scatter plot of engine size vs price")
 plt.xlabel('engine size')
 plt.ylable('price')
 
+# categorical variables that describe a characteristic of a data unit, and are selected
+# from a small group of categories, the categorical variables can have the type 'object'
+# or 'int64'. a good way to visualize categorical variable is by using boxplot
 # boxplot, here the course use seaborn.boxplot() function
 # pip install seaborn
 import seaborn as sns

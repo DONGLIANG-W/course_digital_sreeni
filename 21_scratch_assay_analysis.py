@@ -33,7 +33,7 @@ plt.plot(time_list,area_list,'bo')
 # ax[0].set_title("Original image")
 # ax[1].imshow(entropy_img)
 # ax[1].set_title("entropy image")
-# ax[2].imshow(binary)
+# ax[2].imshow(binary)d
 # ax[2].set_title("Binary image")
 plt.show()
 # print(linregress(time_list,area_list))

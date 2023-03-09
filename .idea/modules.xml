@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/course_digitalsreeni.iml" filepath="$PROJECT_DIR$/.idea/course_digitalsreeni.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/course_digital_sreeni.iml" filepath="$PROJECT_DIR$/.idea/course_digital_sreeni.iml" />
+>>>>>>> 9da0ce4665422b11086fe7f6e9c29d0f95028448
     </modules>
   </component>
 </project>

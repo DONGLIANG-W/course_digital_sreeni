@@ -15,6 +15,6 @@ median_skimage = median(img, mode='constant', cval=0.0)
 cv2.imshow('salt and pepper', img)
 cv2.imshow('skimage median',median_skimage)
 cv2.waitKey()
-cv2.destroyAllWindow()
+cv2.destroyAllWindows()
 
 

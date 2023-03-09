@@ -4,9 +4,12 @@ import cv2
 import numpy as np
 
 
-img = img_as_float(io.imread('./images/BSE_Google_noisy.jpg'))
+img_gaussian = img_as_float(io.imread('./images/BSE_Google_noisy.jpg'))
 img_salt = img_as_float(io.imread('./images/BSE_salt_pepper.jpg'))
 
-img = img
+img = img_gaussian
+
+
+
 
 

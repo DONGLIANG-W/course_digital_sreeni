@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="dec15d8c-bae1-4a90-9cda-3cb6458be2bd" name="Changes" comment="add and push">
       <change beforePath="$PROJECT_DIR$/97_median_filter.py" beforeDir="false" afterPath="$PROJECT_DIR$/97_median_filter.py" afterDir="false" />
@@ -19,6 +22,19 @@
   <component name="Git.Settings">
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="0cffb402-8c99-4876-91c4-6ebd04438100" />
+        <option name="url" value="git@github.com:DONGLIANG-W/course_digital_sreeni.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="ProjectId" id="2M23wNjSEZ074BZysIdqiHzG2wF" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">

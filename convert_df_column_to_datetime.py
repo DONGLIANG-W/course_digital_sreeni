@@ -30,3 +30,29 @@ for sheet_name, df in dfs.items():
     print(f"Sheet: {sheet_name}")
     print(df)
     print()  # Empty line for separation
+
+
+# adding function for the search
+import pandas as pd
+
+# Specify the path to the Excel file
+excel_file_path = 'path/to/your/excel/file.xlsx'
+
+# Read all sheets into a dictionary of dataframes
+dfs = pd.read_excel(excel_file_path, sheet_name=None)
+
+# Concatenate all dataframes into a single dataframe
+combined_df = pd.concat(dfs.values(), ignore_index=True)
+
+# Add columns for each sheet
+for sheet_name in dfs.keys():
+    combined_df[f'Found in sheet {sheet_name}'] = False
+
+# Set values to True if row is found in each sheet
+for sheet_name, df in dfs.items():
+    found_col = f'Found in sheet {sheet_name}'
+    combined_df[found_col] = combined_df.apply(
+        lambda row: row['Name'] in df['Name'].values, axis=1
+    )
+
+print(combined_df)

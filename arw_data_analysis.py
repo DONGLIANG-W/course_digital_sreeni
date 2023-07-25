@@ -150,4 +150,40 @@ print("Correlation Coefficient (CM):", cm_date_cost_corr)
 print("Correlation Coefficient (PM):", pm_date_cost_corr)
 
 
+#
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 
+# Sample event data
+events = {
+    'Event A': '2023-01-15',
+    'Event B': '2023-02-10',
+    'Event C': '2023-03-22',
+    'Event D': '2023-05-05'
+}
+
+# Step 3: Create the figure and axis
+fig, ax = plt.subplots(figsize=(10, 6))
+
+# Step 4: Convert the dates to datetime objects
+event_dates = [mdates.datestr2num(date) for date in events.values()]
+
+# Step 5: Plot the vertical lines or markers
+ax.vlines(event_dates, ymin=0, ymax=1, color='blue', linestyle='dashed', label='Events')
+# If you prefer markers instead of lines, use the following:
+# ax.plot_date(event_dates, [1] * len(event_dates), 'bo', linestyle='dashed', label='Events')
+
+# Step 6: Format the x-axis as dates
+ax.xaxis.set_major_locator(mdates.MonthLocator())
+ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+
+# Step 7: Add labels and title
+ax.set_xlabel('Date')
+ax.set_title('Timeline Events')
+
+# Step 8: Show legend
+ax.legend()
+
+# Step 9: Show the plot
+plt.tight_layout()
+plt.show()

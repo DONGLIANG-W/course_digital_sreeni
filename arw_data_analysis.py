@@ -258,3 +258,42 @@ plt.legend(loc='best', bbox_to_anchor=(1.0, 1.0))
 plt.grid(axis='x')
 plt.tight_layout()
 plt.show()
+
+# add label
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+
+# Step 1: Prepare your data
+data = {
+    'Event': ['Event A', 'Event B', 'Event C', 'Event D'],
+    'Date': ['2023-01-15', '2023-02-10', '2023-03-22', '2023-05-05'],
+    'Color': ['blue', 'green', 'orange', 'red']  # Different colors for each event
+}
+
+df = pd.DataFrame(data)
+
+# Step 2: Convert the 'Date' column to datetime type
+df['Date'] = pd.to_datetime(df['Date'])
+
+# Step 3: Create the timeline plot with different colored bars for each event
+plt.figure(figsize=(10, 5))
+
+for idx, row in df.iterrows():
+    plt.barh(row['Event'], width=1, height=0.6, left=row['Date'], color=row['Color'], alpha=0.7)
+    plt.text(row['Date'], row['Event'], row['Event'], ha='right', va='center', fontsize=12)
+
+# Step 4: Format the plot
+plt.gca().xaxis.set_major_locator(mdates.MonthLocator())
+plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+plt.xlabel('Date')
+plt.ylabel('Event')
+plt.title('Timeline of Events')
+plt.grid(axis='x')
+plt.tight_layout()
+
+# Step 5: Show the plot
+plt.show()
+
+
+

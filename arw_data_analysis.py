@@ -222,3 +222,39 @@ plt.tight_layout()
 
 # Step 5: Show the plot
 plt.show()
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Step 2: Create a pandas DataFrame with event data
+data = {
+    'Event': ['Event A', 'Event B', 'Event C', 'Event D'],
+    'Date': ['2023-01-15', '2023-02-10', '2023-03-22', '2023-05-05']
+}
+
+df = pd.DataFrame(data)
+
+# Step 3: Convert the 'Date' column to datetime type
+df['Date'] = pd.to_datetime(df['Date'])
+
+# Step 4: Create a color map for events
+color_map = plt.get_cmap('tab10')
+num_colors = len(df['Event'].unique())
+event_colors = color_map(np.linspace(0, 1, num_colors))
+
+# Step 5: Plot the timeline with different colors for events
+plt.figure(figsize=(10, 5))
+for i, (event, color) in enumerate(zip(df['Event'].unique(), event_colors)):
+    event_df = df[df['Event'] == event]
+    plt.scatter(event_df['Date'], np.repeat(i, len(event_df)), color=color, label=event, s=100)
+
+plt.yticks(range(len(df['Event'].unique())), df['Event'].unique())
+plt.ylabel('Event')
+plt.xlabel('Date')
+plt.title('Timeline of Events')
+plt.legend(loc='best', bbox_to_anchor=(1.0, 1.0))
+plt.grid(axis='x')
+plt.tight_layout()
+plt.show()

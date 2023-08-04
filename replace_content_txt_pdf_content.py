@@ -61,3 +61,28 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+import shutil
+
+def copy_and_rename_folder(source_folder, destination_folder, new_name):
+    try:
+        # Copy the entire source folder to the destination
+        shutil.copytree(source_folder, destination_folder)
+        
+        # Rename the copied folder
+        new_folder_path = f"{destination_folder}/{new_name}"
+        shutil.move(destination_folder, new_folder_path)
+        
+        print(f"Folder '{source_folder}' copied and renamed to '{new_folder_path}' successfully.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+# Provide the paths and names
+source_folder_path = '/path/to/source_folder'
+destination_folder_path = '/path/to/destination_folder'
+new_folder_name = 'new_folder_name'
+
+# Call the function
+copy_and_rename_folder(source_folder_path, destination_folder_path, new_folder_name)
+

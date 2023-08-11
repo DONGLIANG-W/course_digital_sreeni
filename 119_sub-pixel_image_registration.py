@@ -6,6 +6,7 @@ from skimage.registration._phase_cross_correlation import _upsampled_dft
 from scipy.ndimage import fourier_shift, shift
 import cv2
 
+
 img = cv2.imread('images/BSE_Image.jpg', 0)
 # create an shifted image, first fourier shift the frequency domain image, then inverse fourier transform the frequency
 # image back to space domain image

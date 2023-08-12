@@ -4,6 +4,8 @@ from skimage.filters import gaussian
 from skimage import img_as_ubyte
 import os
 import numpy as np
+import shutil
+
 
 # practice 1
 path = '/home/orangepi/PycharmProjects/course_digital_sreeni/images/scratch_assay/*.*'
@@ -30,3 +32,6 @@ for ind in range(img_array.shape[0]):
     cv2.imwrite('/home/orangepi/PycharmProjects/course_digital_sreeni/images/scratch_assay_smooth/'+str(ind)+'.jpg',
                 img_smooth)
 
+# remove the testing image folder
+path = '/home/orangepi/PycharmProjects/course_digital_sreeni/images/scratch_assay_smooth'
+shutil.rmtree(path)

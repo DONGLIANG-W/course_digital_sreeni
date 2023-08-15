@@ -295,5 +295,3 @@ plt.tight_layout()
 # Step 5: Show the plot
 plt.show()
 
-
-

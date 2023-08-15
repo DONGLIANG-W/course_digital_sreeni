@@ -396,3 +396,87 @@ if __name__ == '__main__':
     window = LogAnalyzerApp()
     window.show()
     sys.exit(app.exec_())
+
+
+
+import sys
+import pandas as pd
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QFileDialog, QVBoxLayout, QWidget
+import matplotlib
+matplotlib.use('Qt5Agg')
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+
+class LogAnalyzerApp(QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        self.setWindowTitle('Log Analyzer')
+        self.setGeometry(100, 100, 800, 600)
+
+        self.init_ui()
+
+    def init_ui(self):
+        self.layout = QVBoxLayout()
+
+        self.lbl_file_path = QLabel('Enter or Browse Log File Path:')
+        self.layout.addWidget(self.lbl_file_path)
+
+        self.edit_file_path = QLineEdit()
+        self.layout.addWidget(self.edit_file_path)
+
+        self.btn_browse = QPushButton('Browse')
+        self.btn_browse.clicked.connect(self.browse_file)
+        self.layout.addWidget(self.btn_browse)
+
+        self.btn_plot = QPushButton('Plot and Analyze')
+        self.btn_plot.clicked.connect(self.plot_data)
+        self.layout.addWidget(self.btn_plot)
+
+        self.figure = Figure()
+        self.canvas = FigureCanvas(self.figure)
+        self.layout.addWidget(self.canvas)
+
+        self.lbl_message = QLabel()
+        self.layout.addWidget(self.lbl_message)
+
+        self.central_widget = QWidget()
+        self.central_widget.setLayout(self.layout)
+        self.setCentralWidget(self.central_widget)
+
+    def browse_file(self):
+        file_dialog = QFileDialog()
+        file_dialog.setFileMode(QFileDialog.ExistingFiles)
+        file_paths, _ = file_dialog.getOpenFileNames(self, 'Select Log File(s)', '', 'Log Files (*.log);;All Files (*)')
+        self.edit_file_path.setText('\n'.join(file_paths))
+
+    def plot_data(self):
+        file_paths = self.edit_file_path.toPlainText().split('\n')
+        if not file_paths:
+            return
+
+        try:
+            data_frames = [pd.read_csv(file_path) for file_path in file_paths]
+            # Perform data processing and plotting here
+            # Calculate time to reach threshold and decide PM message
+            self.lbl_message.setText("Preventive maintenance required." if time_to_reach_threshold < 30 else "PM could be done in next round")
+
+            # Clear previous plot and create a new one
+            self.figure.clear()
+            ax = self.figure.add_subplot(111)
+            ax.plot(data, label='Data')
+            ax.plot(trend_line, label='Trend Line')
+            ax.set_xlabel('Time')
+            ax.set_ylabel('Value')
+            ax.legend()
+
+            # Refresh canvas
+            self.canvas.draw()
+        except Exception as e:
+            self.lbl_message.setText(f"Error: {e}")
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    mainWin = LogAnalyzerApp()
+    mainWin.show()
+    sys.exit(app.exec_())

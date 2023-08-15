@@ -295,3 +295,104 @@ plt.tight_layout()
 # Step 5: Show the plot
 plt.show()
 
+import sys
+import os
+import pandas as pd
+import matplotlib.pyplot as plt
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton, QFileDialog, QTextEdit
+
+class LogAnalyzerApp(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Log Analyzer")
+        self.setGeometry(100, 100, 800, 600)
+
+        self.central_widget = QWidget(self)
+        self.setCentralWidget(self.central_widget)
+
+        self.layout = QVBoxLayout()
+
+        self.path_label = QLabel("Enter Log File Path:")
+        self.path_edit = QLineEdit()
+        self.browse_button = QPushButton("Browse")
+        self.browse_button.clicked.connect(self.browse_logs)
+
+        self.blink_label = QLabel()
+        self.blink_label.setVisible(False)
+
+        self.load_button = QPushButton("Load and Analyze")
+        self.load_button.clicked.connect(self.load_and_analyze)
+
+        self.figure, self.ax = plt.subplots()
+        self.canvas = FigureCanvas(self.figure)
+
+        self.result_label = QLabel()
+
+        self.layout.addWidget(self.path_label)
+        self.layout.addWidget(self.path_edit)
+        self.layout.addWidget(self.browse_button)
+        self.layout.addWidget(self.blink_label)
+        self.layout.addWidget(self.load_button)
+        self.layout.addWidget(self.canvas)
+        self.layout.addWidget(self.result_label)
+
+        self.central_widget.setLayout(self.layout)
+
+        self.log_data = None
+
+    def browse_logs(self):
+        options = QFileDialog.Options()
+        options |= QFileDialog.ReadOnly
+        file_dialog = QFileDialog()
+        file_dialog.setFileMode(QFileDialog.ExistingFiles)
+        file_dialog.setNameFilter("Log Files (*.log *.txt)")
+        file_dialog.setOptions(options)
+        file_paths, _ = file_dialog.getOpenFileNames(self, "Select Log File(s)")
+        
+        if file_paths:
+            self.log_paths = file_paths
+            self.blink_label.setText("\n".join(file_paths))
+            self.blink_label.setVisible(True)
+
+    def load_and_analyze(self):
+        if not hasattr(self, 'log_paths') or not self.log_paths:
+            self.result_label.setText("Please select log file(s) first.")
+            return
+
+        try:
+            self.log_data = pd.concat((pd.read_csv(path) for path in self.log_paths))
+        except Exception as e:
+            self.result_label.setText(f"Error loading log data: {e}")
+            return
+
+        self.ax.clear()
+        self.log_data.plot(x='time', y='value', ax=self.ax)
+        self.ax.set_xlabel("Time")
+        self.ax.set_ylabel("Value")
+
+        self.calculate_trend()
+
+        self.canvas.draw()
+
+    def calculate_trend(self):
+        # Calculate trend and time to reach a threshold
+        # Replace this with your actual calculation
+
+        trend_time = 15  # Placeholder value for demonstration
+        if trend_time < 30:
+            message = "Preventive maintenance required."
+        else:
+            message = "PM could be done in next round."
+
+        self.result_label.setText(message)
+
+class FigureCanvas(plt.backends.backend_qt5agg.FigureCanvasQTAgg):
+    def __init__(self, figure):
+        self.figure = figure
+        super().__init__(self.figure)
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = LogAnalyzerApp()
+    window.show()
+    sys.exit(app.exec_())

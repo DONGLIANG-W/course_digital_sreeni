@@ -601,3 +601,71 @@ if __name__ == '__main__':
     window = LogAnalyzerApp()
     window.show()
     sys.exit(app.exec_())
+
+
+#multilines
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QPushButton, QTextEdit, QFileDialog, QLabel
+
+class FileCounterApp(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("File Counter App")
+        self.setGeometry(100, 100, 400, 300)
+
+        self.central_widget = QWidget(self)
+        self.setCentralWidget(self.central_widget)
+
+        self.layout = QVBoxLayout()
+        self.central_widget.setLayout(self.layout)
+
+        self.file_display = QTextEdit()
+        self.layout.addWidget(self.file_display)
+
+        self.scroll_area = QWidget()
+        self.scroll_layout = QVBoxLayout(self.scroll_area)
+        self.scroll_area.setLayout(self.scroll_layout)
+        self.layout.addWidget(self.scroll_area)
+
+        self.scroll_area.setMaximumHeight(100)
+        self.scroll_area.setContentsMargins(0, 0, 0, 0)
+
+        self.scroll_area.setStyleSheet("background-color: lightgray;")
+
+        self.scroll_bar = self.scroll_area.verticalScrollBar()
+
+        self.open_button = QPushButton("Open Files")
+        self.open_button.clicked.connect(self.open_files)
+        self.layout.addWidget(self.open_button)
+
+        self.count_label = QLabel("Number of Files: 0")
+        self.layout.addWidget(self.count_label)
+
+        self.file_count = 0
+
+    def open_files(self):
+        file_dialog = QFileDialog()
+        file_dialog.setFileMode(QFileDialog.ExistingFiles)
+        files, _ = file_dialog.getOpenFileNames(self, "Select Files", "", "All Files (*)")
+
+        if files:
+            self.file_display.clear()
+            self.scroll_layout.clear()
+            self.file_count = len(files)
+            self.count_label.setText(f"Number of Files: {self.file_count}")
+
+            for file in files:
+                self.scroll_layout.addWidget(QLabel(file))
+                self.scroll_layout.setAlignment(Qt.AlignTop)
+
+    def update_scroll_bar(self):
+        self.scroll_bar.setValue(self.scroll_bar.maximum())
+
+def main():
+    app = QApplication(sys.argv)
+    window = FileCounterApp()
+    window.show()
+    sys.exit(app.exec_())
+
+if __name__ == "__main__":
+    main()

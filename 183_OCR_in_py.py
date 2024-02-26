@@ -20,4 +20,5 @@ fig, axs = plt.subplots(nrows=len(images), figsize=(20, 20))
 for ax, image, predictions in zip(axs, images, predictions_groups):
     keras_ocr.tools.drawAnnotations(image=image, predictions=predictions, ax=ax)
 
+plt.savefig('images/signage/ocr_prediction.png')
 plt.show()

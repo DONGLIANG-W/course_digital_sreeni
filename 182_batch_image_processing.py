@@ -1,7 +1,7 @@
 import cv2
 import glob
 from skimage.filters import gaussian
-from skimage import img_as_ubyte
+from skimage.util import img_as_ubyte
 import os
 import numpy as np
 import shutil

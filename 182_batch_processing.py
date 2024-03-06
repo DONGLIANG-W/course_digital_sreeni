@@ -23,7 +23,3 @@ for root, dirs, files in os.walk('images/grains/'):
 # read and save each image into a layer in the array matrix, then process
 # each layer of the matrix. Note the dimension of each layer must identical, else
 # need to resize the image, which is not favorable.
-
-
-
-

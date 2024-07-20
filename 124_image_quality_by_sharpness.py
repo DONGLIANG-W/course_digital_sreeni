@@ -16,8 +16,8 @@ score3 = iqa.get_sharpness(img_3)
 score4 = iqa.get_sharpness(img_4)
 score5 = iqa.get_sharpness(img_5)
 
-print("sharpness for reference image 1: {:.2f},"
-      "sharpness for reference image 2: {:.2f},"
-      "sharpness for reference image 3: {:.2f},"
-      "sharpness for reference image 4: {:.2f},"
+print("sharpness for reference image 1: {:.2f},\n"
+      "sharpness for reference image 2: {:.2f},\n"
+      "sharpness for reference image 3: {:.2f},\n"
+      "sharpness for reference image 4: {:.2f},\n"
       "sharpness for reference image 5: {:.2f},".format(score1, score2, score3, score4, score5))
